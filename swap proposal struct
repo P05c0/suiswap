@@ -1,0 +1,6 @@
+struct SwapProposal has key, store {
+    offered_sword_id: UID,
+    requested_sword_id: UID,
+    offerer: address,
+    requestee: address,
+}
