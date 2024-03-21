@@ -1,0 +1,70 @@
+// my_first_package/sources/SwordSwap.move
+
+address 0x1 {
+module SwordSwap {
+
+    use 0x1::sui::object::{Self, UID};
+    use 0x1::sui::transfer;
+    use 0x1::sui::tx_context::{Self, TxContext};
+    use std::vector::Vector;
+
+    struct Sword has key, store {
+        id: UID,
+        magic: u64,
+        strength: u64,
+    }
+
+    struct Forge has key, store {
+        id: UID,
+        swords_created: u64,
+    }
+
+    struct SwapProposal has key, store {
+        offered_sword_id: UID,
+        requested_sword_id: UID,
+        offerer: address,
+        requestee: address,
+    }
+
+    public fun init(ctx: &mut TxContext) {
+        let admin = Forge {
+            id: object::new(ctx),
+            swords_created: 0,
+        };
+        transfer::public_transfer(admin, tx_context::sender(ctx));
+    }
+
+    public fun propose_swap(ctx: &mut TxContext, offered_sword_id: UID, requested_sword_id: UID, requestee: address) {
+        // Omitted: Logic to verify ownership and existence of offered_sword_id
+        let proposal = SwapProposal {
+            offered_sword_id,
+            requested_sword_id,
+            offerer: tx_context::sender(ctx),
+            requestee,
+        };
+        // Omitted: Logic to store the proposal for retrieval and acceptance
+    }
+
+    public fun accept_swap(ctx: &mut TxContext, proposal_id: UID) {
+        // Omitted: Retrieve the proposal using proposal_id
+        // Omitted: Logic to verify the requestee is calling this function
+        // Omitted: Logic to transfer the swords between offerer and requestee
+        // Omitted: Logic to remove the proposal from storage
+    }
+
+    // Utility functions for creating swords, accessing properties, etc., go here
+
+    // Part 4: Accessors required to read the struct attributes
+    public fun magic(self: &Sword): u64 {
+        self.magic
+    }
+
+    public fun strength(self: &Sword): u64 {
+        self.strength
+    }
+
+    public fun swords_created(self: &Forge): u64 {
+        self.swords_created
+    }
+}
+}
