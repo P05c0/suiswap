@@ -1,0 +1,5 @@
+public fun accept_swap(ctx: &mut TxContext, proposal_id: UID) {
+    // Logic to verify the requestee owns the requested_sword_id
+    // Transfer the NFTs between the offerer and requestee
+    // Remove the proposal from the active list
+}
