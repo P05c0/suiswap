@@ -1,0 +1,5 @@
+public fun propose_swap(ctx: &mut TxContext, offered_sword_id: UID, requested_sword_id: UID, requestee: address) {
+    // Logic to verify the offerer owns the offered_sword_id
+    // Create and store the SwapProposal object
+    // This might involve adding the proposal to a vector or map of active proposals
+}
